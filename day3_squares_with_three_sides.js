@@ -25,7 +25,7 @@ console.log('Part 1:', possibleTriangles(sets));
 var groups = [];
 
 for (var i = 0; i < sets.length; ) {
-    var group = [sets[i][0], sets[i+1][0], sets[i+2][0]];
+    var group = [sets[i][0], sets[i + 1][0], sets[i + 2][0]];
     groups.push(group);
     group = [sets[i][1], sets[i + 1][1], sets[i + 2][1]];
     groups.push(group);
