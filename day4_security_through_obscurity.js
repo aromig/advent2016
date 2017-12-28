@@ -69,7 +69,6 @@ function decrypt(room) {
         } else {
             for (var j = 0; j < room.sectorID; j++) {
                 letter = String.fromCharCode(letter.charCodeAt(0) < 122 ? letter.charCodeAt(0) + 1 : 97);
-                //letter = String.fromCharCode(letter.charCodeAt(0)+1);
             }
         }
         decrypted += letter;
