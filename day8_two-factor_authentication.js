@@ -2,20 +2,20 @@
 // http://adventofcode.com/2016/day/8
 
 // screen is a 50x6 grid
-var screen = [], row = [];
-for (var y = 0; y < 6; y++) {
+let screen = [], row = [];
+for (let y = 0; y < 6; y++) {
     screen[y] = [];
-    for (var x = 0; x < 50; x++) {
+    for (let x = 0; x < 50; x++) {
         screen[y].push('.');
     }
 }
 
-var input = ``;
+const input = ``;
 
-var ops = input.split('\n')
+const ops = input.split('\n')
     .map(x => {
-        var line = [];
-        var parts = x.split(' ');
+        let line = [];
+        let parts = x.split(' ');
         if (parts[0] == 'rect') {
             line[0] = 'rect';
             line[1] = parseInt(parts[1].split('x')[0]);
@@ -35,7 +35,7 @@ ops.forEach(line => {
     doOp(line[0], line[1], line[2]);
 });
 
-var pixels = countCharInArray(screen, '#');
+const pixels = countCharInArray(screen, '#');
 
 console.log('Part 1:', pixels);
 console.log('Part 2:');
@@ -44,37 +44,42 @@ showScreen(screen);
 /* ***** FUNCTIONS ***** */
 
 function doOp(op, param1, param2) {
+    let vals = null, val = null, new_vals = null, move = null, stop = null;
     switch (op) {
-        case 'rect':            for (var y = 0; y < param2; y++) {
-                                    for (var x = 0; x < param1; x++) {
+        case 'rect':            for (let y = 0; y < param2; y++) {
+                                    for (let x = 0; x < param1; x++) {
                                         screen[y][x] = '#'
                                     }
                                     
                                 }
                                 break;
-        case 'rotate row':      var row = param1, move = param2;
-                                var vals = screen[row];
-                                var new_vals = [];
-                                for (var v = 0; v < vals.length; v++) {
-                                    var val = vals[v], stop = v;
-                                    for (var mv = 1; mv <= move; mv++) {
+        case 'rotate row':      let row = param1;
+                                move = param2;
+                                vals = screen[row];
+                                new_vals = [];
+                                for (let v = 0; v < vals.length; v++) {
+                                    val = vals[v];
+                                    stop = v;
+                                    for (let mv = 1; mv <= move; mv++) {
                                         stop = stop < vals.length - 1 ? stop + 1 : 0;
                                     }
                                     new_vals[stop] = val;
                                 }
                                 screen[row] = new_vals;
                                 break;
-        case 'rotate column':   var col = param1, move = param2;
-                                var vals = screen.map(row => row[col]);
-                                var new_vals = [];
-                                for (var v = 0; v < vals.length; v++) {
-                                    var val = vals[v], stop = v;
-                                    for (var mv = 1; mv <= move; mv++) {
+        case 'rotate column':   let col = param1;
+                                move = param2;
+                                vals = screen.map(row => row[col]);
+                                new_vals = [];
+                                for (let v = 0; v < vals.length; v++) {
+                                    val = vals[v];
+                                    stop = v;
+                                    for (let mv = 1; mv <= move; mv++) {
                                         stop = stop < vals.length - 1 ? stop + 1 : 0;
                                     }
                                     new_vals[stop] = val;
                                 }
-                                for (var y = 0; y < new_vals.length; y++) {
+                                for (let y = 0; y < new_vals.length; y++) {
                                     screen[y][col] = new_vals[y];
                                 }
                                 break;
@@ -88,7 +93,7 @@ function showScreen(screen) {
 }
 
 function countCharInArray(arr, char) {
-    var count = 0;
+    let count = 0;
     arr.forEach(line => {
         count += (line.join('').match(new RegExp(char, "g")) || []).length;
     });

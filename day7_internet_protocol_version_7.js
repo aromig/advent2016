@@ -1,15 +1,15 @@
 // Advent of Code - Day 7
 // http://adventofcode.com/2016/day/7
 
-var input = ``; // insert from day7_input.txt
+const input = ``; // insert from day7_input.txt
 
-var IPs = input.split('\n');
+const IPs = input.split('\n');
 
-var supportTLS_count = IPs.reduce((count, IP) => supportsTLS(IP) ? ++count : count, 0);
+const supportTLS_count = IPs.reduce((count, IP) => supportsTLS(IP) ? ++count : count, 0);
 
 console.log('Part 1:', supportTLS_count);
 
-var supportSSL_count = IPs.reduce((count, IP) => supportsSSL(IP) ? ++count : count, 0);
+const supportSSL_count = IPs.reduce((count, IP) => supportsSSL(IP) ? ++count : count, 0);
 
 console.log('Part 2:', supportSSL_count);
 
@@ -32,10 +32,10 @@ function supportsSSL(IP) {
 }
 
 function parseIP(IP) {
-    var supernetArray = [], hypernetArray = [];
-    var split1 = IP.split('[');
+    let supernetArray = [], hypernetArray = [];
+    let split1 = IP.split('[');
     split1.forEach(x => {
-        var split2 = x.split(']');
+        let split2 = x.split(']');
         if (split2.length == 1) {
             split2[0] && supernetArray.push(split2[0]);
         } else {
@@ -43,13 +43,13 @@ function parseIP(IP) {
             split2[0] && hypernetArray.push(split2[0]);
         }
     });
-    var netArrays = [supernetArray, hypernetArray];
+    let netArrays = [supernetArray, hypernetArray];
     return netArrays;
 }
 
 function hasABBA(str) {
     if (str.length < 4) return false;
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         if (!str[i]) break;
         if (isABBA(str.slice(i, i + 4))) return true;
     }
@@ -65,18 +65,18 @@ function isABBA(str) {
 function findNetArrayABAs(netArray) {
     return netArray.reduce((acc, str) => {
         //console.log(acc, findABAs);
-        var abaArray = acc.concat(findABAs(str));
+        let abaArray = acc.concat(findABAs(str));
         return abaArray;
     }, []);
 }
 
 function findABAs(str) {
-    var result = [];
+    let result = [];
 
     if (str.length < 3) return result;
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         if (!str[i]) break;
-        var slice = str.slice(i, i + 3)
+        let slice = str.slice(i, i + 3)
         if (isABA(slice)) {
             result.push(slice);
         }

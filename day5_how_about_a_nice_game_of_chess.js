@@ -1,14 +1,14 @@
 // Advent of Code - Day 5
 // http://adventofcode.com/2016/day/5
 
-var doorID = 'abbhdwsy';
+const doorID = 'abbhdwsy';
 
 // Part 1
 
-var password = '', idx = 0;
+let password = '', idx = 0;
 
 while (password.length < 8) {
-    var hash = MD5(doorID + idx++);
+    let hash = MD5(doorID + idx++);
     if (hash.substr(0, 5) == '00000') {
         password += hash[5];
     }
@@ -18,12 +18,12 @@ console.log('Part 1:', password);
 
 // Part 2
 
-var password = '________'.split(''), idx = 0;
+password = '________'.split(''), idx = 0;
 
 while (password.indexOf('_') != -1) {
-    var hash = MD5(doorID + idx++);
+    let hash = MD5(doorID + idx++);
     if (hash.substr(0, 5) == '00000') {
-        var pos = parseInt(hash[5]), val = hash[6];
+        let pos = parseInt(hash[5]), val = hash[6];
         if (!isNaN(pos) && pos < 8) {
             password[pos] = password[pos] == '_' ? val : password[pos];
         }

@@ -1,17 +1,17 @@
 // Advent of Code - Day 1
 // http://adventofcode.com/2016/day/1
 
-var input = 'L4, L1, R4, R1, R1, L3, R5, L5, L2, L3, R2, R1, L4, R5, R4, L2, R1, R3, L5, R1, L3, L2, R5, L4, L5, R1, R2, L1, R5, L3, R2, R2, L1, R5, R2, L1, L1, R2, L1, R1, L2, L2, R4, R3, R2, L3, L188, L3, R2, R54, R1, R1, L2, L4, L3, L2, R3, L1, L1, R3, R5, L1, R5, L1, L1, R2, R4, R4, L5, L4, L1, R2, R4, R5, L2, L3, R5, L5, R1, R5, L2, R4, L2, L1, R4, R3, R4, L4, R3, L4, R78, R2, L3, R188, R2, R3, L2, R2, R3, R1, R5, R1, L1, L1, R4, R2, R1, R5, L1, R4, L4, R2, R5, L2, L5, R4, L3, L2, R1, R1, L5, L4, R1, L5, L1, L5, L1, L4, L3, L5, R4, R5, R2, L5, R5, R5, R4, R2, L1, L2, R3, R5, R5, R5, L2, L1, R4, R3, R1, L4, L2, L3, R2, L3, L5, L2, L2, L1, L2, R5, L2, L2, L3, L1, R1, L4, R2, L4, R3, R5, R3, R4, R1, R5, L3, L5, L5, L3, L2, L1, R3, L4, R3, R2, L1, R3, R1, L2, R4, L3, L3, L3, L1, L2';
+const input = 'L4, L1, R4, R1, R1, L3, R5, L5, L2, L3, R2, R1, L4, R5, R4, L2, R1, R3, L5, R1, L3, L2, R5, L4, L5, R1, R2, L1, R5, L3, R2, R2, L1, R5, R2, L1, L1, R2, L1, R1, L2, L2, R4, R3, R2, L3, L188, L3, R2, R54, R1, R1, L2, L4, L3, L2, R3, L1, L1, R3, R5, L1, R5, L1, L1, R2, R4, R4, L5, L4, L1, R2, R4, R5, L2, L3, R5, L5, R1, R5, L2, R4, L2, L1, R4, R3, R4, L4, R3, L4, R78, R2, L3, R188, R2, R3, L2, R2, R3, R1, R5, R1, L1, L1, R4, R2, R1, R5, L1, R4, L4, R2, R5, L2, L5, R4, L3, L2, R1, R1, L5, L4, R1, L5, L1, L5, L1, L4, L3, L5, R4, R5, R2, L5, R5, R5, R4, R2, L1, L2, R3, R5, R5, R5, L2, L1, R4, R3, R1, L4, L2, L3, R2, L3, L5, L2, L2, L1, L2, R5, L2, L2, L3, L1, R1, L4, R2, L4, R3, R5, R3, R4, R1, R5, L3, L5, L5, L3, L2, L1, R3, L4, R3, R2, L1, R3, R1, L2, R4, L3, L3, L3, L1, L2';
 
-var directions = input.split(', ');
+const directions = input.split(', ');
 
-var facing = 'N';
-var pos = { 'x': 0, 'y': 0 };
+let facing = 'N';
+let pos = { 'x': 0, 'y': 0 };
 
 // Part 1
 
 directions.forEach(dir => {
-    var turn = dir[0], steps = parseInt(dir.substr(1));
+    let turn = dir[0], steps = parseInt(dir.substr(1));
 
     switch (facing) {
         case 'N':   pos.x += (turn == 'R') ? steps : (-1 * steps);
@@ -29,20 +29,20 @@ directions.forEach(dir => {
     }
 });
 
-var mDist = Math.abs(pos.x) + Math.abs(pos.y);
+let mDist = Math.abs(pos.x) + Math.abs(pos.y);
 
 console.log('Part 1:', mDist);
 
 // Part 2
 
-var pos = { 'x': 0, 'y': 0 };
-var facing = 'N';
-var seen = [];
-var hq = [];
-var found = false;
+pos = { 'x': 0, 'y': 0 };
+facing = 'N';
+let seen = [];
+let hq = [];
+let found = false;
 
 function isInArray(array, item) {
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         if (array[i][0] == item[0] && array[i][1] == item[1])
             return true;
     }
@@ -51,9 +51,9 @@ function isInArray(array, item) {
 
 function takeSteps(stepX, stepY, neg) {
     if (stepX != 0) {
-        for (var x = 1; x <= stepX; x++) {
+        for (let x = 1; x <= stepX; x++) {
             pos.x += (!neg) ? 1 : -1;
-            var coords = [pos.x, pos.y];
+            let coords = [pos.x, pos.y];
             if (!found) {
                 if (isInArray(seen, coords)) {
                     hq = coords;
@@ -63,9 +63,9 @@ function takeSteps(stepX, stepY, neg) {
             seen.push(coords);
         }
     } else {
-        for (var y = 1; y <= stepY; y++) {
+        for (let y = 1; y <= stepY; y++) {
             pos.y += (!neg) ? 1 : -1;
-            var coords = [pos.x, pos.y];
+            let coords = [pos.x, pos.y];
             if (!found) {
                 if (isInArray(seen, coords)) {
                     hq = coords;
@@ -78,7 +78,7 @@ function takeSteps(stepX, stepY, neg) {
 }
 
 directions.forEach(dir => {
-    var turn = dir[0], steps = parseInt(dir.substr(1));
+    let turn = dir[0], steps = parseInt(dir.substr(1));
 
     switch (facing) {
         case 'N':   if (turn == 'R') {
@@ -108,6 +108,6 @@ directions.forEach(dir => {
     }
 });
 
-hqDist = Math.abs(hq[0]) + Math.abs(hq[1]); 
+let hqDist = Math.abs(hq[0]) + Math.abs(hq[1]); 
 
 console.log('Part 2:', hqDist);
